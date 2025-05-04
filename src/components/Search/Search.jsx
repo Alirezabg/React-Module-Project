@@ -1,23 +1,24 @@
-import "./Search.scss";
+import React, { useState } from "react";
 
-const Search = () => (
-  <section className="search">
-    <header className="search__header">
-      <h4 className="search__heading heading">Search Bookings</h4>
-    </header>
-    <form className="search__form">
-      <label className="search__label" htmlFor="customerName">
-        &rarr;
-      </label>
+const Search = ({ search }) => {
+  const [term, setTerm] = useState("");
+
+  const doSearch = (e) => {
+    e.preventDefault();
+    search(term);
+  };
+
+  return (
+    <form className="search-form" onSubmit={doSearch}>
       <input
         type="search"
-        id="customerName"
-        className="search__input"
-        placeholder="Customer name"
+        placeholder="Search by name or email"
+        value={term}
+        onChange={(e) => setTerm(e.target.value)}
       />
-      <button className="button search__button">Search</button>
+      <button type="submit">Search</button>
     </form>
-  </section>
-);
+  );
+};
 
 export default Search;
